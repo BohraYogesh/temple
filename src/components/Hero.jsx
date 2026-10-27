@@ -12,7 +12,7 @@ const PLANT_W = 495;       // plant ki width
 const PLANT_BOTTOM = -163; // negative = plant neeche screen ke bahar jata hai
 const PLANT_GROW = 1.3;    // bade screen par plant kitna bada ho sakta hai (1 = mobile jaisa, 1.6 = aur bada)
 
-const TEMPLE_W = 450;      // temple ki width
+const TEMPLE_W = 460;      // temple ki width
 const TEMPLE_BOTTOM = 0;   // 0 = bilkul bottom se start
 const TEMPLE_H = (TEMPLE_W * 1024) / 677;
 const TEMPLE_CROWN = (TEMPLE_H * 81) / 1024;
@@ -54,7 +54,7 @@ export default function Hero() {
   const serif = { fontFamily: "Marcellus, serif" };
   const nameStyle = { ...serif, fontSize: k(60), lineHeight: 1, letterSpacing: ".01em" };
   const smallStyle = { ...serif, color: GOLD, fontSize: k(14), lineHeight: k(14), marginTop: k(8), letterSpacing: ".08em" };
-  const tagStyle = { fontFamily: "Poppins, sans-serif", fontWeight: 600, color: GOLD, fontSize: k(7), lineHeight: k(22), marginTop: k(4), letterSpacing: ".06em" };
+  const tagStyle = { fontFamily: "Poppins, sans-serif", fontWeight: 600, color: GOLD, fontSize: k(10), lineHeight: k(22), marginTop: k(4), letterSpacing: ".06em" };
 
   return (
     <header

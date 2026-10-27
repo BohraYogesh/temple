@@ -69,7 +69,7 @@ export default function Events() {
           <div className="rounded-[2.1rem] border-[3px] border-[#103b88] p-[3px]">
             <div className="relative overflow-hidden rounded-[1.8rem] border border-[#d5ad50] bg-[#fffdf8] px-3 pb-6 pt-3 sm:px-4 sm:pt-4 lg:px-10 lg:pb-12 lg:pt-6">
               {/* Event header */}
-              <div className="mb-3 flex items-center justify-between gap-2 px-1 lg:mb-4 lg:px-0">
+              {/* <div className="mb-3 flex items-center justify-between gap-2 px-1 lg:mb-4 lg:px-0">
                 <p className="font-ui text-sm font-semibold text-[#1761bd] sm:text-base">
                   {e.tag}
                 </p>
@@ -80,7 +80,7 @@ export default function Events() {
                   stroke="#1761bd"
                   className="shrink-0"
                 />
-              </div>
+              </div> */}
 
               {/* Body: mobile stacked, desktop 2 columns */}
               <div className="lg:grid lg:grid-cols-[minmax(320px,38%)_minmax(0,1fr)] lg:items-start lg:gap-12 xl:gap-16">
@@ -210,17 +210,17 @@ export default function Events() {
               </div>
 
               {/* Decorative stars */}
-              <div className="pointer-events-none absolute left-3 top-2 hidden text-[#e5b33e] lg:block">
+              {/* <div className="pointer-events-none absolute left-3 top-2 hidden text-[#e5b33e] lg:block">
                 <Star size={17} fill="currentColor" />
-              </div>
+              </div> */}
 
-              <div className="pointer-events-none absolute bottom-2 left-3 text-[#e5b33e]">
+              {/* <div className="pointer-events-none absolute bottom-2 left-3 text-[#e5b33e]">
                 <Star size={17} fill="currentColor" />
-              </div>
+              </div> */}
 
-              <div className="pointer-events-none absolute bottom-2 right-3 text-[#e5b33e]">
+              {/* <div className="pointer-events-none absolute bottom-2 right-3 text-[#e5b33e]">
                 <Star size={17} fill="currentColor" />
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { weddingConfig as c } from "../weddingConfig";
 
 export default function MusicToggle() {
@@ -8,14 +8,58 @@ export default function MusicToggle() {
 
   if (!ok || !c.music) return null;
 
+  const userPaused = useRef(false); // user ne khud pause kiya to auto-start band
+
+  useEffect(() => {
+    const a = audio.current;
+    if (!a || !c.music) return;
+
+    // tap/click/key = asli user action (allowed). scroll/wheel = sirf koshish, block ho sakta hai
+    const events = [
+      "pointerup",
+      "touchend",
+      "click",
+      "keydown",
+      "wheel",
+      "scroll",
+    ];
+
+    const stop = () =>
+      events.forEach((e) => window.removeEventListener(e, start, true));
+    const start = () => {
+      if (userPaused.current) return stop();
+      a.play()
+        .then(() => {
+          setOn(true);
+          stop();
+        })
+        .catch(() => {}); // block hua to listener rahega, agle tap par phir koshish hogi
+    };
+
+    // pehle seedha koshish
+    a.play()
+      .then(() => setOn(true))
+      .catch(() => {
+        events.forEach((e) =>
+          window.addEventListener(e, start, { capture: true, passive: true }),
+        );
+      });
+
+    return stop;
+  }, []);
+
   const toggle = () => {
     const a = audio.current;
     if (!a) return;
     if (on) {
+      userPaused.current = true;
       a.pause();
       setOn(false);
     } else {
-      a.play().then(() => setOn(true)).catch(() => setOk(false));
+      userPaused.current = false;
+      a.play()
+        .then(() => setOn(true))
+        .catch(() => setOk(false));
     }
   };
 
@@ -55,15 +99,23 @@ export default function MusicToggle() {
         onClick={toggle}
         aria-label={on ? "Pause music" : "Play music"}
         className="relative grid h-[44px] w-[44px] place-items-center rounded-full border-2 border-white/90 text-white shadow-[0_5px_14px_rgba(0,0,0,0.28)] ring-1 ring-black/5 transition duration-200 hover:scale-105 active:scale-95"
-        style={{ background: "linear-gradient(145deg, #dcbf93 0%, #b88f5e 100%)" }}
+        style={{
+          background: "linear-gradient(145deg, #dcbf93 0%, #b88f5e 100%)",
+        }}
       >
         {on ? (
-          <svg viewBox="0 0 24 24" className="h-[15px] w-[15px] fill-current drop-shadow-sm">
+          <svg
+            viewBox="0 0 24 24"
+            className="h-[15px] w-[15px] fill-current drop-shadow-sm"
+          >
             <rect x="6" y="5" width="4" height="14" rx="1.2" />
             <rect x="14" y="5" width="4" height="14" rx="1.2" />
           </svg>
         ) : (
-          <svg viewBox="0 0 24 24" className="ml-[2px] h-[17px] w-[17px] fill-current drop-shadow-sm">
+          <svg
+            viewBox="0 0 24 24"
+            className="ml-[2px] h-[17px] w-[17px] fill-current drop-shadow-sm"
+          >
             <path d="M7 4.5v15a1 1 0 0 0 1.5.9l12-7.5a1 1 0 0 0 0-1.7l-12-7.5A1 1 0 0 0 7 4.5z" />
           </svg>
         )}

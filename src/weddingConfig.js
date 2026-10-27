@@ -1,8 +1,8 @@
 export const weddingConfig = {
   meta: {
-    title: "Rahul weds Kiran – Wedding Invitation",
-    hashtag: "#Rahulkikiran",
-    instagram: "https://instagram.com/theartfulinvites",
+    title: "Arun  weds Divya – Wedding Invitation",
+    hashtag: "#ArunkiDivya",
+    instagram: "https://www.instagram.com/_creative_maze/?hl=en",
   },
 
   theme: {
@@ -14,7 +14,7 @@ export const weddingConfig = {
     ink: "60 36 28",
   },
 
-  couple: { groom: "Rahul", bride: "Kiran", tagline: "ARE GETTING MARRIED" },
+  couple: { groom: "Arun", bride: "Divya", tagline: "ARE GETTING MARRIED" },
   weddingDate: "2026-12-17T10:00:00+05:30",
   music: "audio/music.mp3", // optional; remove file & button hides itself
 
