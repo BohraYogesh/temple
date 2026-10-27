@@ -7,6 +7,7 @@ export default function SmartImage({
   className = "",
   label,
   style,
+  priority = false,
 }) {
   const [failed, setFailed] = useState(false);
   if (!src || failed)
@@ -25,9 +26,11 @@ export default function SmartImage({
       src={base + src}
       alt={alt}
       style={style}
-      loading="lazy"
-      onError={() => setFailed(true)}
       className={className}
+      loading={priority ? "eager" : "lazy"}
+      fetchpriority={priority ? "high" : "auto"}
+      decoding="async"
+      onError={() => setFailed(true)}
     />
   );
 }

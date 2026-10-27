@@ -67,7 +67,7 @@ export default function Hero() {
       }}
     >
       {/* SKY */}
-      <SmartImage src={c.images.sky} alt="" className="absolute inset-0 z-0 h-full w-full object-cover" />
+      <SmartImage src={c.images.sky} alt="" priority className="absolute inset-0 z-0 h-full w-full object-cover" />
 
       {/* TEXT (temple ke piche) */}
       <div
@@ -94,7 +94,7 @@ export default function Hero() {
           transform: "translate3d(-50%, var(--temple, 0px), 0)",
         }}
       >
-        <SmartImage src={c.images.hero} alt="Temple gopuram" style={{ display: "block", width: "100%", height: "100%" }} />
+        <SmartImage src={c.images.hero} alt="Temple gopuram" priority style={{ display: "block", width: "100%", height: "100%" }} />
       </div>
 
       {/* PLANT: bottom me fix. kp unit se bade screen par bada hota hai, bachi jagah par mirror copy */}
@@ -113,7 +113,7 @@ export default function Hero() {
             className="absolute inset-0"
             style={{ transform: `translateX(${i * 100}%) scaleX(${i % 2 === 0 ? 1 : -1})` }}
           >
-            <SmartImage src={c.images.plant} alt="" style={{ display: "block", width: "100%", height: "100%" }} />
+            <SmartImage src={c.images.plant} alt="" priority  style={{ display: "block", width: "100%", height: "100%" }} />
           </div>
         ))}
       </div>

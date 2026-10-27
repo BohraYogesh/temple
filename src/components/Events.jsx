@@ -13,17 +13,6 @@ import { weddingConfig as c } from "../weddingConfig";
 
 const BASE = import.meta.env.BASE_URL;
 
-const eventImages = [
-  "images/haldi.webp",
-  "images/mehndi.webp",
-  "images/sangeet.webp",
-  "images/wedding.webp",
-  "images/reception.webp",
-];
-
-const getImagePath = (index) =>
-  `${BASE}${eventImages[index % eventImages.length]}`;
-
 const fmt = (date) =>
   new Date(`${date}T12:00:00`).toLocaleDateString("en-GB", {
     day: "numeric",
@@ -51,7 +40,7 @@ export default function Events() {
       id="events"
       className="relative isolate overflow-hidden px-3 py-12 sm:px-6 sm:py-20 lg:px-10 lg:py-16"
       style={{
-        backgroundImage: `url("${BASE}images/bg.webp")`,
+        backgroundImage: `url("${BASE}${c.images.eventsBg}")`,
         backgroundSize: "cover",
         backgroundPosition: "center top",
         backgroundRepeat: "no-repeat",
@@ -103,9 +92,10 @@ export default function Events() {
                       }}
                     >
                       <img
-                        src={getImagePath(i)}
+                        src={BASE + e.image}
                         alt={e.title}
                         loading="eager"
+                        decoding="async"
                         className="aspect-[4/4.4] w-full object-cover object-center"
                       />
 

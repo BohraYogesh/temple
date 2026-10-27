@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { weddingConfig as c } from "./weddingConfig";
+import Preloader from "./components/Preloader";
 import Hero from "./components/Hero";
 import Invite from "./components/Invite";
 import Events from "./components/Events";
@@ -10,22 +11,31 @@ import Social from "./components/Social";
 import Countdown from "./components/Countdown";
 import Wishes from "./components/Wishes";
 import MusicToggle from "./components/MusicToggle";
+import { preloadQueue } from "./utils/preload";
+
+/* Hero ke baad baaki sab images, scroll ke order me, background me */
+function PreloadRest() {
+  useEffect(() => {
+    const i = c.images;
+    const list = [
+      i.frame, i.ganesh, i.inviteBg,           // Invite
+      i.eventsBg, ...c.events.map((e) => e.image), // Events
+      ...Object.values(i),                      // bachi hui sab (duplicates apne aap hat jate hain)
+    ];
+    const run = () => preloadQueue(list, 3);
+    const id = "requestIdleCallback" in window
+      ? requestIdleCallback(run, { timeout: 2500 })
+      : setTimeout(run, 800);
+    return () => ("cancelIdleCallback" in window ? cancelIdleCallback(id) : clearTimeout(id));
+  }, []);
+  return null;
+}
 
 export default function App() {
   useEffect(() => {
     document.title = c.meta.title;
-    const t = c.theme;
-    Object.entries({
-      maroon: t.maroon,
-      gold: t.gold,
-      cream: t.cream,
-      navy: t.navy,
-      ink: t.ink,
-    }).forEach(([k, v]) =>
-      document.documentElement.style.setProperty(`--c-${k}`, v),
-    );
   }, []);
-  // Set variables synchronously for first paint too
+
   const t = c.theme;
   const vars = {
     "--c-maroon": t.maroon,
@@ -34,18 +44,22 @@ export default function App() {
     "--c-navy": t.navy,
     "--c-ink": t.ink,
   };
+
   return (
-    <main style={vars} className="min-h-screen bg-cream">
-      <Hero />
-      <Invite />
-      <Events />
-      <Venue />
-      <Story />
-      {/* <Rsvp /> */}
-      <Wishes />
-      <Social />
-      <Countdown />
-      <MusicToggle />
-    </main>
+    <Preloader>
+      <main style={vars} className="min-h-screen bg-cream">
+        <PreloadRest />
+        <Hero />
+        <Invite />
+        <Events />
+        <Venue />
+        <Story />
+        {/* <Rsvp /> */}
+        <Wishes />
+        <Social />
+        <Countdown />
+        <MusicToggle />
+      </main>
+    </Preloader>
   );
 }
