@@ -9,6 +9,7 @@ import Story from "./components/Story";
 import Social from "./components/Social";
 import Countdown from "./components/Countdown";
 import Wishes from "./components/Wishes";
+import MusicToggle from "./components/MusicToggle";
 
 export default function App() {
   useEffect(() => {
@@ -44,6 +45,7 @@ export default function App() {
       <Wishes />
       <Social />
       <Countdown />
+      <MusicToggle />
     </main>
   );
 }
