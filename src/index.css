@@ -1,0 +1,96 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-cream font-body text-ink antialiased overflow-x-hidden;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity .9s ease, transform .9s cubic-bezier(.2, .7, .2, 1);
+}
+
+.reveal.in {
+  opacity: 1;
+  transform: none;
+}
+
+.arch {
+  border-radius: 999px 999px 24px 24px / 220px 220px 24px 24px;
+}
+
+.gold-text {
+  background: linear-gradient(90deg, #b8862d, #f1d98a, #b8862d);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+:root {
+  --c-maroon: 90 15 31;
+  --c-gold: 201 162 75;
+  --c-cream: 246 239 224;
+  --c-navy: 29 58 138;
+  --c-ink: 60 36 28;
+}
+
+
+.venue-cloud {
+  position: absolute;
+  width: clamp(150px, 38vw, 270px);
+  height: auto;
+  object-fit: contain;
+  opacity: 0.98;
+  will-change: transform;
+  animation: venue-cloud-drift 8s ease-in-out infinite alternate;
+}
+
+.venue-cloud-one {
+  top: 3%;
+  left: 2%;
+}
+
+.venue-cloud-two {
+  top: 15%;
+  right: 1%;
+  width: clamp(140px, 34vw, 240px);
+  animation-duration: 10s;
+  animation-direction: alternate-reverse; /* ulti direction me chalega */
+}
+
+.venue-cloud-three {
+  top: 9%; /* pehle 34% tha, temple ke peeche chhip raha tha */
+  left: 38%;
+  width: clamp(125px, 30vw, 215px);
+  animation-duration: 9s;
+}
+
+@keyframes venue-cloud-drift {
+  from { translate: -30px 0; }
+  to { translate: 140px 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .venue-cloud {
+    animation: none;
+  }
+}
